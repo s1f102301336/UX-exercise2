@@ -11,6 +11,8 @@ class SpotForm(forms.ModelForm):
             'title',
             'image',
             'description',
+            'business_hours',
+            'fees',
             'access',
             'address',
         ]

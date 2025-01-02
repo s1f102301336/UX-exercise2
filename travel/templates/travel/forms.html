@@ -23,6 +23,7 @@
         <div>
           <label for="time">おすすめの時間帯</label>
           <select name="time" id="time">
+            <option value="All_the_Day">いつでも</option>
             <option value="Morning">朝</option>
             <option value="Noon">昼</option>
             <option value="Night">夜</option>
@@ -31,6 +32,7 @@
         <div>
           <label for="weather">おすすめの天気</label>
           <select name="weather" id="weather">
+            <option value="All_Weather">どの天気でも</option>
             <option value="Sunny">晴れ</option>
             <option value="Cloudy">曇り</option>
             <option value="Rainy">雨</option>
@@ -39,6 +41,7 @@
         <div>
           <label for="season">おすすめの季節</label>
           <select name="season" id="season">
+            <option value="All_Season">年中</option>
             <option value="Spring">春</option>
             <option value="Summer">夏</option>
             <option value="Fall">秋</option>
@@ -50,6 +53,10 @@
         {{form.image}}
         <label for="description">説明：</label>
         <input type="text" name="description" id="description" />
+        <label for="business_hours">営業時間：</label>
+        <input type="text" name="business_hours" id="business_hours" />
+        <label for="fees">入場料金：</label>
+        <input type="text" name="fees" id="fees" />
         <label for="access">アクセス：</label>
         <input type="text" name="access" id="access" />
         <label for="address">住所：</label>
