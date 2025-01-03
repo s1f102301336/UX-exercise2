@@ -1,16 +1,31 @@
-.spots_head {
-  text-align: center;
-}
-.season_head {
-  text-align: center;
+.now_spots {
+  margin: 5rem 0 5rem 0;
 }
 
+.spots_head {
+  text-align: center;
+  margin: 5rem 0 3rem 0;
+}
+.season_spots {
+  margin: 5rem 0 5rem 0;
+}
+
+.season_head {
+  text-align: center;
+  margin: 5rem 0 3rem 0;
+}
+
+.content {
+  margin-top: 5rem;
+}
 .title {
   border-bottom: 3px solid orange;
+  margin: 0 0 2rem 0;
 }
 .image {
   width: 80%;
-  text-align: center;
+  display: block;
+  margin: auto;
 }
 .description {
 }
@@ -28,13 +43,30 @@ ul li {
 }
 
 ul li a {
+  font-size: larger;
   color: #fff;
   text-decoration: none;
   display: block;
   background: orange;
+  margin: 0 2rem 0 2rem;
+  border-radius: 5px;
+  text-align: center;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 ul li a.current {
   background: #fff;
   color: orange;
+  border: 3px solid orange;
+}
+
+.now_situation i {
+  font-size: 8rem;
+  text-align: center;
+  width: auto;
+  height: auto;
+}
+
+.situation_body {
+  text-align: center;
 }

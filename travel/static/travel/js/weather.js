@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // console.log("Current Weather:", weather);
 
     //今の天気を表示
-    const now_weather = document.getElementById("now_weather");
-    now_weather.textContent = weather;
+    // const now_weather = document.getElementById("now_weather");
+    // now_weather.textContent = weather;
 
     //今の時間を取得
     const now_time = new Date().getHours();
@@ -25,13 +25,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         : 12 <= now_time && now_time <= 16
         ? "Noon"
         : "Night";
-    const hours = document.getElementById("now_hours");
-    hours.textContent = now_hours;
+    // const hours = document.getElementById("now_hours");
+    // hours.textContent = now_hours;
+
+    //HTMLに反映
+    const id_weather =
+      weather === "Clear" || weather === "Sunny"
+        ? "sunny"
+        : weather === "Clouds"
+        ? "cloudy"
+        : "rainy";
+    const id_hours = now_hours.toLowerCase();
+
+    $(document).ready(() => {
+      const now_situation = () => {
+        $(`#now_weather i[id!=${id_weather}]`).hide();
+        $(`#now_hours i[id!=${id_hours}]`).hide();
+      };
+
+      now_situation();
+    });
 
     // 全データの取得
     const dataResponse = await fetch(DATA_URL);
     const allData = await dataResponse.json();
     // console.log("All Data:", allData);
+
+    //スライドショーの写真抽出
+    createSlide(allData);
 
     // 天気でフィルタリング----------------------
     const filterWeather =
@@ -77,10 +98,61 @@ document.addEventListener("DOMContentLoaded", async () => {
       // HTMLに季節フィルタリングしたデータを表示
       updateHTML(filteredData_season.slice(0, S_num), `${season}-data`);
     });
+
+    //最後にスライドショー
+    slideshow();
   } catch (error) {
     console.error("Error:", error);
   }
 });
+
+//スライドショーimgを作成
+const createSlide = (all_data) => {
+  const slideshow = document.getElementById("slideshow");
+  slideshow.innerHTML = "";
+  all_data.forEach((data) => {
+    const img = document.createElement("img");
+    img.setAttribute("src", `/media/${data.image}`);
+    img.setAttribute("alt", `Slide ${data.id}`);
+    img.setAttribute("class", "slide");
+
+    slideshow.appendChild(img);
+  });
+};
+
+//スライドショーする関数
+const slideshow = () => {
+  const slides = document.querySelectorAll(".slide");
+  let currentIndex = 0;
+
+  // クラスの更新関数
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove("previous2", "previous", "active", "next");
+      if (index === (currentIndex - 2 + slides.length) % slides.length) {
+        slide.classList.add("previous2");
+      } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+        slide.classList.add("previous");
+      } else if (index === currentIndex) {
+        slide.classList.add("active");
+      } else if (index === (currentIndex + 1) % slides.length) {
+        slide.classList.add("next");
+      }
+    });
+  }
+
+  // スライドを切り替える関数
+  function showNextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlides();
+  }
+
+  // 初期化
+  updateSlides();
+
+  // 一定間隔でスライドを切り替え
+  setInterval(showNextSlide, 5000); // 3秒ごとに次のスライドを表示
+};
 
 // HTMLの更新関数
 function updateHTML(data, containerId) {
@@ -89,36 +161,78 @@ function updateHTML(data, containerId) {
 
   container.innerHTML = ""; // 一度クリア
   data.forEach((item) => {
-    const div = document.createElement("div");
-    div.setAttribute("class", "content");
+    const tag_weather = item.weather;
+    const tag_hours = item.time;
+
+    const div_p = document.createElement("div");
+    const div_c = document.createElement("div");
+    div_p.setAttribute("class", "content card shadow");
+    div_c.setAttribute("class", "card-body ");
     if (item.title) {
-      div.innerHTML += `<h3 class="title">${item.title}</h3>`;
+      div_c.innerHTML += `<h3 class="title">${item.title}</h3>`;
     }
 
     if (item.image) {
-      div.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="image">`;
+      div_c.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="image">`;
     }
 
     if (item.description) {
-      div.innerHTML += `<p class="description">${item.description}</p>`;
+      div_c.innerHTML += `<p class="description">${item.description}</p>`;
     }
 
     if (item.access) {
-      div.innerHTML += `<p class="access"><strong>アクセス:</strong> ${item.access}</p>`;
+      div_c.innerHTML += `<p class="access"><strong>アクセス:</strong> ${item.access}</p>`;
     }
 
     if (item.business_hours) {
-      div.innerHTML += `<p class="business_hours"><strong>営業時間:</strong> ${item.business_hours}</p>`;
+      div_c.innerHTML += `<p class="business_hours"><strong>営業時間:</strong> ${item.business_hours}</p>`;
     }
 
     if (item.fees) {
-      div.innerHTML += `<p class="fees"><strong>料金:</strong> ${item.fees}</p>`;
+      div_c.innerHTML += `<p class="fees"><strong>料金:</strong> ${item.fees}</p>`;
     }
 
     if (item.address) {
-      div.innerHTML += `<p class="address"><strong>住所:</strong> ${item.address}</p>`;
+      div_c.innerHTML += `<p class="address"><strong>住所:</strong> ${item.address}</p>`;
     }
 
-    container.appendChild(div);
+    switch (tag_weather) {
+      case "Sunny":
+        div_c.innerHTML +=
+          '<strong>おすすめの天気:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i>';
+        break;
+      case "Cloudy":
+        div_c.innerHTML +=
+          '<strong>おすすめの天気:</strong><i class="bi bi-cloud-fill" id="cloudy" style="color: grey"></i>';
+        break;
+      case "Rainy":
+        div_c.innerHTML +=
+          '<strong>おすすめの天気:</strong><i class="bi bi-cloud-rain-fill" style="color: skyblue"></i>';
+        break;
+      case "All_Weather":
+        div_c.innerHTML +=
+          '<strong>おすすめの天気:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i><i class="bi bi-cloud-fill" id="cloudy" style="color: grey"></i><i class="bi bi-cloud-rain-fill" style="color: skyblue"></i>';
+        break;
+    }
+    switch (tag_hours) {
+      case "Morning":
+        div_c.innerHTML +=
+          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-alt-high-fill" style="color: orange"></i>';
+        break;
+      case "Noon":
+        div_c.innerHTML +=
+          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i>';
+        break;
+      case "Night":
+        div_c.innerHTML +=
+          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-moon-stars-fill" style="color: yellow"></i>';
+        break;
+      case "All_the_Day":
+        div_c.innerHTML +=
+          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-alt-high-fill" style="color: orange"></i><i class="bi bi-moon-stars-fill" style="color: yellow"></i><i class="bi bi-moon-stars-fill" style="color: yellow"></i>';
+    }
+
+    container.appendChild(div_p);
+    div_p.appendChild(div_c);
   });
 }

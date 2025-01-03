@@ -1,0 +1,46 @@
+/* スライドショーのコンテナ */
+#slideshow-container {
+  display: block;
+  margin: auto;
+  position: relative;
+  width: 70%;
+  height: 1000px;
+  /* overflow: hidden; */
+}
+
+/* 各スライド */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 200%; /* 初期状態では右側に配置 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 5s ease, left 5s ease; /* アニメーション */
+  /* color: rgba(0, 0, 0, 0.6); */
+  z-index: 0;
+}
+
+.slide.next {
+  left: 100%; /* 左側にスライドアウト */
+  transform: translateX(0);
+  z-index: 10;
+}
+
+.slide.active {
+  left: 0; /* 表示中のスライド */
+  transform: translateX(0);
+  z-index: 10;
+}
+
+.slide.previous {
+  left: -100%; /* 左側にスライドアウト */
+  transform: translateX(0);
+  z-index: 10;
+}
+
+.slide.previous2 {
+  left: -200%; /* 左側にスライドアウト */
+  transform: translateX(0);
+  z-index: 10;
+}
