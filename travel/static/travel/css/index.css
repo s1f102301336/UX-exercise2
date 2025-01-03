@@ -9,6 +9,8 @@
   border-bottom: 3px solid orange;
 }
 .image {
+  width: 80%;
+  text-align: center;
 }
 .description {
 }
