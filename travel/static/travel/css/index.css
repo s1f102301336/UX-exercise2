@@ -1,3 +1,38 @@
 .spots_head {
   text-align: center;
 }
+.season_head {
+  text-align: center;
+}
+
+.title {
+  border-bottom: 3px solid orange;
+}
+.image {
+}
+.description {
+}
+.access {
+}
+.business_hours {
+}
+.fees {
+}
+.address {
+}
+
+ul li {
+  list-style-type: none;
+}
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  background: orange;
+}
+
+ul li a.current {
+  background: #fff;
+  color: orange;
+}

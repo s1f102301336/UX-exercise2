@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Spot
 from .forms import SpotForm
+from django.http import Http404, JsonResponse
 
 # Create your views here.
-
-def index(request):
-    return render(request, 'travel/index.html')
 
 def create_spot(request):
     print(request)
@@ -27,3 +25,17 @@ def create_spot(request):
         form = SpotForm()
 
     return render(request, "travel/forms.html",{'form':form}) 
+
+
+def index(request):
+    return render(request, 'travel/index.html')
+
+def get_all_data(request):
+    if request.method == "GET":
+        print("Hello")
+        data = Spot.objects.all().values(
+            'id','time', 'weather', 'season', 'title', 'image', 'description', 'access', 
+            'business_hours', 'fees', 'address'
+        )
+        print("data", data)
+        return JsonResponse(list(data), safe=False)

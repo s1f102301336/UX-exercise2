@@ -25,8 +25,14 @@
           <h3>現在の川越おすすめスポット</h3>
         </div>
         <div class="card">
+          <div class="card-body">
+            <h3 class="text">今の川越の天気</h3>
+            <div id="now_weather"></div>
+          </div>
+        </div>
+        <div class="card">
           <div class="content card-body p-5 gy-5">
-            <h1>時の鐘</h1>
+            <h1 class="title">時の鐘</h1>
             <img src="../../static/travel/img/tokinokane1.jpg" alt="" />
             <p>
               時の鐘は、寛永4年（1627）から同11年（1634）の間に川越城主酒井忠勝が、多賀町（いまの幸町）の現在の場所に建てたものが最初といわれています。
@@ -37,12 +43,44 @@
             </p>
             <h4>アクセス：</h4>
             <h4>住所：</h4>
+
+            <div id="weather-data-container">
+              <!-- 天気に基づくデータをここに表示 -->
+            </div>
           </div>
         </div>
       </div>
-      <div class="season_spots"></div>
+      <div class="season_spots">
+        <div class="season_head">
+          <p>今が旬！</p>
+          <h3>季節ごとの川越おすすめスポット</h3>
+        </div>
+        <ul>
+          <li><a href="#Spring-data" class="current">春</a></li>
+          <li><a href="#Summer-data">夏</a></li>
+          <li><a href="#Fall-data">秋</a></li>
+          <li><a href="#Winter-data">冬</a></li>
+        </ul>
+        <div id="contents" class="card">
+          <div id="Spring-data" class="card-body">
+            <!-- 春とオールシーズンのデータが挿入される -->
+          </div>
+          <div id="Summer-data" class="card-body">
+            <!-- 夏とオールシーズンのデータが挿入される -->
+          </div>
+          <div id="Fall-data" class="card-body">
+            <!-- 秋とオールシーズンのデータが挿入される -->
+          </div>
+          <div id="Winter-data" class="card-body">
+            <!-- 冬とオールシーズンのデータが挿入される -->
+          </div>
+        </div>
+      </div>
       <div class="ai_scheduler"></div>
     </div>
     <div class="footer"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'travel/js/weather.js' %}"></script>
+    <script src="{% static 'travel/js/season.js' %}"></script>
   </body>
 </html>
