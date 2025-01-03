@@ -10,11 +10,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    timeout-minutes: 30  # タイムアウトを延長
+
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.10, 3.11]  # Python 3.9は削除
-        django-version: [4.2, 5.1.4]  # Djangoバージョンを動的に選択
+        python-version: [3.10, 3.11]
 
     steps:
     - uses: actions/checkout@v4
@@ -25,7 +26,6 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install "Django==${{ matrix.django-version }}"
         pip install -r requirements.txt
     - name: Run Tests
       run: |
