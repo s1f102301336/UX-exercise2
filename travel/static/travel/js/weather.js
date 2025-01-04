@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("realWeather", weather);
     console.log("Filtered Data:", filteredData_weather);
 
-    const W_num = 3; //表示数
+    const W_num = 4; //表示数
 
     // HTMLに天気フィルタリングしたデータを表示
     updateHTML(filteredData_weather.slice(0, W_num), "weather-data-container");
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       filteredData_season.push(...allSeason); //All_Seasonを追加
       //   console.log("Season data", filteredData_season);
 
-      const S_num = 3; //表示数
+      const S_num = 4; //表示数
 
       // HTMLに季節フィルタリングしたデータを表示
       updateHTML(filteredData_season.slice(0, S_num), `${season}-data`);
@@ -151,7 +151,7 @@ const slideshow = () => {
   updateSlides();
 
   // 一定間隔でスライドを切り替え
-  setInterval(showNextSlide, 5000); // 3秒ごとに次のスライドを表示
+  setInterval(showNextSlide, 6000); // 3秒ごとに次のスライドを表示
 };
 
 // HTMLの更新関数
@@ -164,75 +164,63 @@ function updateHTML(data, containerId) {
     const tag_weather = item.weather;
     const tag_hours = item.time;
 
-    const div_p = document.createElement("div");
+    const div_pp = document.createElement("div");
+    div_pp.setAttribute("class", "col-6 p-3 div_pp");
+    const div_p = document.createElement("a");
     const div_c = document.createElement("div");
+    const div_c_text = document.createElement("div");
     div_p.setAttribute("class", "content card shadow");
-    div_c.setAttribute("class", "card-body ");
+    div_p.setAttribute("href", item.detail_url);
+    div_c.setAttribute("class", "content_text card-body pb-2");
+    if (item.image) {
+      div_p.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="card-img-top" style="height:70%">`;
+    }
+
     if (item.title) {
       div_c.innerHTML += `<h3 class="title">${item.title}</h3>`;
     }
 
-    if (item.image) {
-      div_c.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="image">`;
-    }
-
-    if (item.description) {
-      div_c.innerHTML += `<p class="description">${item.description}</p>`;
-    }
-
-    if (item.access) {
-      div_c.innerHTML += `<p class="access"><strong>アクセス:</strong> ${item.access}</p>`;
-    }
-
-    if (item.business_hours) {
-      div_c.innerHTML += `<p class="business_hours"><strong>営業時間:</strong> ${item.business_hours}</p>`;
-    }
-
-    if (item.fees) {
-      div_c.innerHTML += `<p class="fees"><strong>料金:</strong> ${item.fees}</p>`;
-    }
-
-    if (item.address) {
-      div_c.innerHTML += `<p class="address"><strong>住所:</strong> ${item.address}</p>`;
-    }
-
+    div_c_text.setAttribute("class", "d-none d-lg-block");
     switch (tag_weather) {
       case "Sunny":
-        div_c.innerHTML +=
-          '<strong>おすすめの天気:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i>';
+        div_c_text.innerHTML +=
+          '<strong>おすすめの天気:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i><i class="bi bi-cloud-fill" id="cloudy" style="color: grey"></i>';
         break;
       case "Cloudy":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<strong>おすすめの天気:</strong><i class="bi bi-cloud-fill" id="cloudy" style="color: grey"></i>';
         break;
       case "Rainy":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<strong>おすすめの天気:</strong><i class="bi bi-cloud-rain-fill" style="color: skyblue"></i>';
         break;
       case "All_Weather":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<strong>おすすめの天気:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i><i class="bi bi-cloud-fill" id="cloudy" style="color: grey"></i><i class="bi bi-cloud-rain-fill" style="color: skyblue"></i>';
         break;
     }
+
     switch (tag_hours) {
       case "Morning":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-alt-high-fill" style="color: orange"></i>';
         break;
       case "Noon":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-high-fill" style="color: orange"></i>';
         break;
       case "Night":
-        div_c.innerHTML +=
+        div_c_text.innerHTML +=
           '<br><strong>おすすめの時間帯:</strong><i class="bi bi-moon-stars-fill" style="color: yellow"></i>';
         break;
       case "All_the_Day":
-        div_c.innerHTML +=
-          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-alt-high-fill" style="color: orange"></i><i class="bi bi-moon-stars-fill" style="color: yellow"></i><i class="bi bi-moon-stars-fill" style="color: yellow"></i>';
+        div_c_text.innerHTML +=
+          '<br><strong>おすすめの時間帯:</strong><i class="bi bi-brightness-alt-high-fill" style="color: red"><i class="bi bi-brightness-high-fill" style="color: orange"></i><i class="bi bi-moon-stars-fill" style="color: yellow"></i>';
     }
 
-    container.appendChild(div_p);
+    container.appendChild(div_pp);
+    div_pp.appendChild(div_p);
     div_p.appendChild(div_c);
+    div_c.appendChild(div_c_text);
   });
 }

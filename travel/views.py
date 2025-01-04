@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Spot
 from .forms import SpotForm
 from django.http import Http404, JsonResponse
+from django.urls import reverse
 
 # Create your views here.
 
@@ -37,5 +38,15 @@ def get_all_data(request):
             'id','time', 'weather', 'season', 'title', 'image', 'description', 'access', 
             'business_hours', 'fees', 'address'
         )
+        data_list = list(data)
+        for item in data_list:
+            item['detail_url'] = reverse('detail', args=[item['id']])
         print("data", data)
         return JsonResponse(list(data), safe=False)
+
+def detail(request, spot_id):
+    spot= Spot.objects.get(pk=spot_id)
+    data = {
+        'spot':spot
+    }
+    return render(request, 'travel/detail.html', data)

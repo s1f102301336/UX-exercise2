@@ -19,108 +19,129 @@
     <title>Travel</title>
   </head>
   <body>
-    <div class="header">
-      <h1>川越観光紹介</h1>
+    <div class="header back_color">
+      <div class="Logo_container py-3">
+        <img
+          src="{% static 'travel/img/Logo2.jpg' %}"
+          alt="logo"
+          class="Logo"
+        />
+      </div>
       <div id="slideshow-container">
         <div id="slideshow"></div>
       </div>
-    </div>
-    <div class="container">
-      <div class="main_picture"></div>
-      <div class="now_spots">
-        <div class="spots_head">
-          <p>いまから行ける！</p>
-          <h3>現在の川越おすすめスポット</h3>
-        </div>
-        <div class="now_situation row g-5">
-          <div class="col-6 p-4">
-            <div class="card">
-              <div class="card-body situation_body">
-                <h2 class="text">今の川越の天気</h2>
-                <div id="now_weather">
-                  <i
-                    class="bi bi-brightness-high-fill"
-                    id="sunny"
-                    style="color: orange"
-                  ></i>
-                  <i
-                    class="bi bi-cloud-fill"
-                    id="cloudy"
-                    style="color: grey"
-                  ></i>
-                  <i
-                    class="bi bi-cloud-rain-fill"
-                    id="rainy"
-                    style="color: skyblue"
-                  ></i>
+
+      <div>
+        <div class="now_spots">
+          <div class="col-8 mx-auto">
+            <div class="spots_head">
+              <p style="font-size: 24px">いまから行ける！</p>
+              <p style="font-size: 40px">現在の川越おすすめスポット</p>
+            </div>
+            <div class="now_situation row g-5">
+              <div class="col-6 p-4">
+                <div class="card">
+                  <div class="card-body situation_body">
+                    <h2 class="text">今の川越の天気</h2>
+                    <div id="now_weather">
+                      <i
+                        class="bi bi-brightness-high-fill"
+                        id="sunny"
+                        style="color: orange"
+                      ></i>
+                      <i
+                        class="bi bi-cloud-fill"
+                        id="cloudy"
+                        style="color: grey"
+                      ></i>
+                      <i
+                        class="bi bi-cloud-rain-fill"
+                        id="rainy"
+                        style="color: skyblue"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 p-4">
+                <div class="card">
+                  <div class="card-body situation_body">
+                    <h2 class="text">今の川越の時間帯</h2>
+                    <div id="now_hours">
+                      <i
+                        class="bi bi-brightness-alt-high-fill"
+                        id="morning"
+                        style="color: orange"
+                      ></i>
+                      <i
+                        class="bi bi-brightness-high-fill"
+                        id="noon"
+                        style="color: orange"
+                      ></i>
+                      <i
+                        class="bi bi-moon-stars-fill"
+                        id="night"
+                        style="color: yellow"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-6 p-4">
-            <div class="card">
-              <div class="card-body situation_body">
-                <h2 class="text">今の川越の時間帯</h2>
-                <div id="now_hours">
-                  <i
-                    class="bi bi-brightness-alt-high-fill"
-                    id="morning"
-                    style="color: orange"
-                  ></i>
-                  <i
-                    class="bi bi-brightness-high-fill"
-                    id="noon"
-                    style="color: orange"
-                  ></i>
-                  <i
-                    class="bi bi-moon-stars-fill"
-                    id="night"
-                    style="color: yellow"
-                  ></i>
+          <div class="back_design">
+            <div class="col-8 mx-auto py-3">
+              <div class="card">
+                <div class="weather_contents card-body p-5 gy-5">
+                  <div id="weather-data-container" class="row">
+                    <!-- 天気に基づくデータを現在の時間でソートしここに表示 class="content"-->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="weather_contents card-body p-5 gy-5">
-            <div id="weather-data-container">
-              <!-- 天気に基づくデータを現在の時間でソートしここに表示 class="content"-->
+        <div class="season_spots">
+          <div class="col-8 mx-auto">
+            <div class="season_head">
+              <p style="font-size: 24px">今が旬！</p>
+              <p style="font-size: 40px">季節ごとの川越おすすめスポット</p>
+            </div>
+            <ul class="row">
+              <li class="col-3">
+                <a href="#Spring-data" class="current">春</a>
+              </li>
+              <li class="col-3"><a href="#Summer-data">夏</a></li>
+              <li class="col-3"><a href="#Fall-data">秋</a></li>
+              <li class="col-3"><a href="#Winter-data">冬</a></li>
+            </ul>
+          </div>
+
+          <div class="back_design">
+            <div class="col-8 mx-auto py-3">
+              <div class="card">
+                <div id="season_contents" class="card-body p-5 gy-5">
+                  <div id="Spring-data" class="row">
+                    <!-- 春とオールシーズンのデータが挿入される class="content"-->
+                  </div>
+                  <div id="Summer-data" class="row">
+                    <!-- 夏とオールシーズンのデータが挿入される class="content"-->
+                  </div>
+                  <div id="Fall-data" class="row">
+                    <!-- 秋とオールシーズンのデータが挿入される class="content"-->
+                  </div>
+                  <div id="Winter-data" class="row">
+                    <!-- 冬とオールシーズンのデータが挿入される class="content"-->
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <!-- <div class="ai_scheduler"></div> -->
       </div>
-      <div class="season_spots">
-        <div class="season_head">
-          <p>今が旬！</p>
-          <h3>季節ごとの川越おすすめスポット</h3>
-        </div>
-        <ul class="row">
-          <li class="col-3"><a href="#Spring-data" class="current">春</a></li>
-          <li class="col-3"><a href="#Summer-data">夏</a></li>
-          <li class="col-3"><a href="#Fall-data">秋</a></li>
-          <li class="col-3"><a href="#Winter-data">冬</a></li>
-        </ul>
-        <div class="card">
-          <div id="season_contents" class="card-body p-5 gy-5">
-            <div id="Spring-data">
-              <!-- 春とオールシーズンのデータが挿入される class="content"-->
-            </div>
-            <div id="Summer-data">
-              <!-- 夏とオールシーズンのデータが挿入される class="content"-->
-            </div>
-            <div id="Fall-data">
-              <!-- 秋とオールシーズンのデータが挿入される class="content"-->
-            </div>
-            <div id="Winter-data">
-              <!-- 冬とオールシーズンのデータが挿入される class="content"-->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ai_scheduler"></div>
+      <div class="footer p-5"></div>
     </div>
-    <div class="footer"></div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'travel/js/weather.js' %}"></script>
     <script src="{% static 'travel/js/season.js' %}"></script>
