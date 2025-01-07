@@ -173,7 +173,7 @@ function updateHTML(data, containerId) {
     div_p.setAttribute("href", item.detail_url);
     div_c.setAttribute("class", "content_text card-body pb-2");
     if (item.image) {
-      div_p.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="card-img-top" style="height:70%">`;
+      div_p.innerHTML += `<img src="/media/${item.image}" alt="${item.title}" class="card-img-top" style="height:65%">`;
     }
 
     if (item.title) {
